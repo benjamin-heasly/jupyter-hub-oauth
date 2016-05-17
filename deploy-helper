@@ -33,8 +33,8 @@ echo "OAUTH_CALLBACK_URL=https://lvh.me/hub/oauth_callback" > $WORKING/env-file
 
 # You can get CLIENT_ID and CLIENT_SECRET from your Google dev console
 # https://console.developers.google.com/apis/credentials
-echo "OAUTH_CLIENT_ID=624644525311-qg194ll1e8e96hbg8oqms13mitdriebr.apps.googleusercontent.com" >> $WORKING/env-file
-echo "OAUTH_CLIENT_SECRET=rdlVEpH3wAUW7v4Ms8DAhbef" >> $WORKING/env-file
+echo "OAUTH_CLIENT_ID=" >> $WORKING/env-file
+echo "OAUTH_CLIENT_SECRET=" >> $WORKING/env-file
 
 
 # Make a self-signed ssl certificate in ssl/.
