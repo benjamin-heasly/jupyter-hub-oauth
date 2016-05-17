@@ -5,7 +5,7 @@ The idea is that all of the generic, reusable config lives in the `ninjaben/jupy
 
 Then all of the site-specific config, like SSL and users, goes in a separate [`deploy-helper`](https://github.com/benjamin-heasly/jupyter-hub-oauth/blob/master/deploy-helper) script and gets mounted into the Docker container at run time.
 
-### Deployment
+# Deployment
 To do your own deployment, you'd copy the `deploy-helper`, edit it with your own site-specific config, and run it.  Or just use the `deploy-helper` as documentation for how to work with `ninjaben/jupyter-jub-oauth`.  You do you!
 
 Here are the site-specific configs you need:
