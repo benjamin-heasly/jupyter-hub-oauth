@@ -1,4 +1,4 @@
-# jupyter-jub-oauth
+# jupyter-hub-oauth
 [JupyterHub](https://github.com/jupyterhub/jupyterhub) with [Google OAuth](https://developers.google.com/identity/protocols/OAuth2).
 
 The idea is that all of the generic, reusable config lives in the `ninjaben/jupyter-jub-oauth` Dockerfile.
