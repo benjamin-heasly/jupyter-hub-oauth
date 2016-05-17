@@ -7,6 +7,9 @@
 #
 # You should be able to copy this script, edit with your site-specific config, and run it.  Donezo!
 #
+# Or you could just treat this script as documentation for how to mount in site-specific
+# config for the ninjaben/jupyter-hub-oauth image.  You do you!
+#
 # 17 May 2016
 # benjamin.heasly@gmail.com
 
