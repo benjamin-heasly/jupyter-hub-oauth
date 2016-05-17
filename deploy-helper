@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+# This script exists to help you configure Jupyter Hub with OAuth.
+# It works with the ninjaben/jupyter-hub-oauth Docker image.
+# The idea is that all of the generic, reusable config lives in the jupyter-hub-oauth Dockerfile.
+# And all of the site-specific config, like ssl and users, goes in this script.
+#
+# You should be able to copy this script, edit with your site-specific config, and run it.  Donezo!
+#
+# 17 May 2016
+# benjamin.heasly@gmail.com
+
+
+# A folder to contain all this site-specific config.
+mkdir -p ~/jupyter-hub-oauth/site-config
+cd ~/jupyter-hub-oauth/site-config
+WORKING=`pwd`
+
+
+# Build a userlist file with one line per user.
+# Lines ending with "admin" declare admin users.  Like you!
+echo "you@gmail.com admin" > $WORKING/userlist
+echo "another@gmail.com" >> $WORKING/userlist
+
+
+# Build an environment file with OAuth info.
+# Pro tip (which I just learned): Use "lvh.me" domain for local testing.
+# It's DNS magic that points back at localhost.
+echo "OAUTH_CALLBACK_URL=https://lvh.me/hub/oauth_callback" > $WORKING/env-file
+
+# You can get CLIENT_ID and CLIENT_SECRET from your Google dev console
+# https://console.developers.google.com/apis/credentials
+echo "OAUTH_CLIENT_ID=624644525311-qg194ll1e8e96hbg8oqms13mitdriebr.apps.googleusercontent.com" >> $WORKING/env-file
+echo "OAUTH_CLIENT_SECRET=rdlVEpH3wAUW7v4Ms8DAhbef" >> $WORKING/env-file
+
+
+# Make a self-signed ssl certificate in ssl/.
+# Or you can put a real certificate and key in there.
+if ! [ -d "ssl" ]; then
+  mkdir $WORKING/ssl
+
+  openssl req -new -newkey rsa:2048 \
+  -rand /dev/urandom -nodes \
+  -keyout $WORKING/ssl.key \
+  -out $WORKING/jupyter.csr \
+  -subj "/C=US/ST=YourState/L=YourLocale/O=YourOrganization/OU=YourDepartment/CN=your.domain"
+  openssl x509 -req -days 365 -in $WORKING/jupyter.csr -signkey $WORKING/ssl.key -out $WORKING/ssl.crt
+fi
+
+
+# Launch JupyterHub!
+# Server port must match the port above in OAUTH_CALLBACK_URL.  443 is default for HTTPS.
+# Mount this working folder into the container at /var/jupyter
+# Pass in the env-file with OAuth gonfig
+PORT=443
+sudo docker run -p $PORT:$PORT \
+  -v $WORKING:/var/jupyter \
+  --env-file=$WORKING/env-file \
+  -t -i ninjaben/jupyter-hub-oauth --port $PORT
+
