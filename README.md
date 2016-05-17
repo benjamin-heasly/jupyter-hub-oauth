@@ -2,7 +2,7 @@
 JupyterHub with Google OAuth.
 
 ### Deployment
-The idea is that all of the generic, reusable config lives in the jupyter-hub-oauth Dockerfile.
+The idea is that all of the generic, reusable config lives in the `ninjaben/jupyter-jub-oauth` Dockerfile.
 
 Then all of the site-specific config, like SSL and users, goes in a separate [`deploy-helper`](https://github.com/benjamin-heasly/jupyter-hub-oauth/blob/master/deploy-helper) script and gets mounted into the Docker container at run time.
 
