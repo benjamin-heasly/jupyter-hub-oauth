@@ -1,11 +1,11 @@
 # jupyter-jub-oauth
 [JupyterHub](https://github.com/jupyterhub/jupyterhub) with [Google OAuth](https://developers.google.com/identity/protocols/OAuth2).
 
-### Deployment
 The idea is that all of the generic, reusable config lives in the `ninjaben/jupyter-jub-oauth` Dockerfile.
 
 Then all of the site-specific config, like SSL and users, goes in a separate [`deploy-helper`](https://github.com/benjamin-heasly/jupyter-hub-oauth/blob/master/deploy-helper) script and gets mounted into the Docker container at run time.
 
+### Deployment
 To do your own deployment, you'd copy the `deploy-helper`, edit it with your own site-specific config, and run it.  Or just use the `deploy-helper` as documentation for how to work with `ninjaben/jupyter-jub-oauth`.  You do you!
 
 Here are the site-specific configs you need:
