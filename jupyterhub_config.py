@@ -11,7 +11,7 @@ c.JupyterHub.log_level = 'DEBUG'
 
 # Shared notebooks
 c.Spawner.notebook_dir = '/srv/ipython/examples'
-c.Spawner.args = ['--NotebookApp.default_url=/notebooks/Hello.ipynb']
+c.Spawner.args = ['--NotebookApp.default_url=/notebooks']
 
 # OAuth and user configuration
 c.JupyterHub.authenticator_class = 'oauthenticator.LocalGoogleOAuthenticator'
