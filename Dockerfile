@@ -28,7 +28,7 @@
 # GITHUB_CLIENT_SECRET=
 #
 # Then you can run:
-# sudo docker run -p 80:8000 -v $CONF:/var/jupyter --env-file=$ENV_FILE -t -i ninjaben/jupyter-hub-oauth
+# sudo docker run -p 443:443 -v $CONF:/var/jupyter --env-file=$ENV_FILE -t -i ninjaben/jupyter-hub-oauth
 #
 
 FROM jupyterhub/jupyterhub
@@ -42,18 +42,19 @@ RUN pip install jupyter \
 # Install oauthenticator
 RUN python3 -m pip install oauthenticator
 
+# Create shared notebook folder
+RUN mkdir -p /srv/ipython/examples \
+  && chmod 777 /srv/ipython/examples
+ADD Hello.ipynb /srv/ipython/examples/Hello.ipynb
+
 # Create oauthenticator directory
 WORKDIR /srv/oauthenticator
 ENV OAUTHENTICATOR_DIR /srv/oauthenticator
 
-# Get config.
+# Get config for jupyterhub and oauth
 ADD jupyterhub_config.py /srv/oauthenticator/jupyterhub_config.py
 ADD addusers.sh /srv/oauthenticator/addusers.sh
 ADD oauth-setup-and-run-jupyterhub /srv/oauthenticator/oauth-setup-and-run-jupyterhub
-
-# Patch the oauthenticator Google implementation, which is broken in version 0.4.0
-#  https://github.com/jupyterhub/oauthenticator/issues/33
-ADD google.py /opt/conda/lib/python3.5/site-packages/oauthenticator/google.py
 
 # Set up users and launch jupyterhub.
 ENTRYPOINT ["/bin/bash", "/srv/oauthenticator/oauth-setup-and-run-jupyterhub"]

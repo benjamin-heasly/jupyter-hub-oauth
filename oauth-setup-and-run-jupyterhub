@@ -18,4 +18,3 @@ sh /srv/oauthenticator/addusers.sh
 # go for jupyterhub!
 jupyterhub "$@"
 
-
