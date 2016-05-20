@@ -39,15 +39,16 @@ echo "OAUTH_CLIENT_SECRET=" >> $WORKING/env-file
 
 # Make a self-signed ssl certificate in ssl/.
 # Or you can put a real certificate and key in there.
-if ! [ -d "ssl" ]; then
-  mkdir $WORKING/ssl
+SSL=$WORKING/ssl
+if ! [ -d "$SSL" ]; then
+  mkdir $SSL
 
   openssl req -new -newkey rsa:2048 \
   -rand /dev/urandom -nodes \
-  -keyout $WORKING/ssl.key \
-  -out $WORKING/jupyter.csr \
+  -keyout $SSL/ssl.key \
+  -out $SSL/jupyter.csr \
   -subj "/C=US/ST=YourState/L=YourLocale/O=YourOrganization/OU=YourDepartment/CN=your.domain"
-  openssl x509 -req -days 365 -in $WORKING/jupyter.csr -signkey $WORKING/ssl.key -out $WORKING/ssl.crt
+  openssl x509 -req -days 365 -in $SSL/jupyter.csr -signkey $SSL/ssl.key -out $SSL/ssl.crt
 fi
 
 
