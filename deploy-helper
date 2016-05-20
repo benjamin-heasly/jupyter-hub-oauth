@@ -15,9 +15,7 @@
 
 
 # A folder to contain all this site-specific config.
-mkdir -p ~/jupyter-hub-oauth/site-config
-cd ~/jupyter-hub-oauth/site-config
-WORKING=`pwd`
+WORKING=/home/you/jupyter/deploy/jupyter-hub-oauth/site-config
 
 
 # Build a userlist file with one line per user.
@@ -56,6 +54,7 @@ fi
 # Server port must match the port above in OAUTH_CALLBACK_URL.  443 is default for HTTPS.
 # Mount this working folder into the container at /var/jupyter
 # Pass in the env-file with OAuth gonfig
+# Capture the log to the Docker host at jupyter.log
 PORT=443
 sudo docker run -p $PORT:$PORT \
   -v $WORKING:/var/jupyter \
