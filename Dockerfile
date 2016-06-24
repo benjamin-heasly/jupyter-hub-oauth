@@ -42,9 +42,9 @@ RUN pip install jupyter \
 # Install oauthenticator
 RUN python3 -m pip install oauthenticator
 
-# Create shared notebook folder
-RUN mkdir -p /srv/ipython/examples \
-  && chmod 777 /srv/ipython/examples
+# Create shared notebook folder and checkpoint folder
+RUN mkdir -p /srv/ipython/examples/.ipynb_checkpoints/ \
+  && chmod -R 777 /srv/ipython/examples
 ADD Hello.ipynb /srv/ipython/examples/Hello.ipynb
 
 # Create oauthenticator directory
