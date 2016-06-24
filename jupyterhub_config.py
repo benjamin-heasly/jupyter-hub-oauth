@@ -17,8 +17,7 @@ c.Spawner.args = ['--NotebookApp.default_url=/notebooks']
 c.JupyterHub.authenticator_class = 'oauthenticator.LocalGoogleOAuthenticator'
 
 c.LocalGoogleOAuthenticator.create_system_users = True
-c.Authenticator.name_regex = r'.+'
-c.Authenticator.add_user_cmd = ['adduser', '--force-badname', '-q', '--gecos', '""', '--disabled-password']
+c.Authenticator.add_user_cmd = ['adduser', '--force-badname', '-q', '--gecos', '""', '--ingroup', 'jupyter', '--disabled-password']
 
 c.Authenticator.whitelist = whitelist = set()
 c.Authenticator.admin_users = admin = set()

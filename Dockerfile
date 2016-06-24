@@ -57,5 +57,6 @@ ADD addusers.sh /srv/oauthenticator/addusers.sh
 ADD oauth-setup-and-run-jupyterhub /srv/oauthenticator/oauth-setup-and-run-jupyterhub
 
 # Set up users and launch jupyterhub.
+RUN groupadd jupyter
 ENTRYPOINT ["/bin/bash", "/srv/oauthenticator/oauth-setup-and-run-jupyterhub"]
 
